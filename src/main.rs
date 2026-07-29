@@ -1,10 +1,19 @@
+mod components;
+
+use components::button::button;
+use components::card::{
+    card, card_content, card_description, card_footer, card_header, card_title,
+};
+use components::input::input;
+use components::label::label;
+
 use topcoat::{
     Result,
     asset::{AssetBundle, RouterBuilderAssetExt},
     font::fontsource::fontsource_font,
     router::{Router, RouterBuilderDiscoverExt, layout, page},
     tailwind,
-    view::{component, view},
+    view::{attributes, component, view},
 };
 
 #[tokio::main]
@@ -50,6 +59,27 @@ async fn root_layout(slot: Result) -> Result {
     }
 }
 
+#[component]
+async fn sign_in() -> Result {
+    view! {
+        card(
+            card_header(
+                card_title("Sign in")
+                card_description("Use your work email to continue.")
+            )
+            card_content(
+                <form class="flex flex-col gap-2">
+                    label(attrs: attributes! { for="email" }, "Email")
+                    input(
+                        attrs: attributes! { id="email" type="email" placeholder="you@example.com" }
+                    )
+                </form>
+            )
+            card_footer(button(attrs: attributes! { class="w-full" }, "Sign in"))
+        )
+    }
+}
+
 #[page("/")]
 async fn home() -> Result {
     view! {
@@ -76,16 +106,7 @@ async fn home() -> Result {
                        "Topcoat + Tailwind"
                    </h1>
 
-                   <p class="mt-2 text-slate-600">
-                       "Utility classes in your Rust sources are compiled into this page's stylesheet by the standalone Tailwind CLI."
-                   </p>
-
-                   <a
-                       href="https://tailwindcss.com/docs"
-                       class="mt-6 inline-block rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-blue-500"
-                   >
-                       "Read the Tailwind docs"
-                   </a>
+                   sign_in()
                </main>
     }
 }
