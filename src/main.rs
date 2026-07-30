@@ -38,10 +38,7 @@ async fn root_layout(slot: Result) -> Result {
         <!DOCTYPE html>
         <html lang="en" data-theme="sunset">
             head()
-            <body
-                class="flex flex-col min-h-screen font-sans"
-                data-theme="sunset"
-            >
+            <body class="flex flex-col min-h-screen font-sans" data-theme="sunset">
                 (slot?)
             </body>
         </html>
@@ -51,9 +48,12 @@ async fn root_layout(slot: Result) -> Result {
 #[page("/")]
 async fn home() -> Result {
     view! {
-        <div class="w-screen">hero()</div>
-        <div class="w-full">daisyui()</div>
-        <div class="w-screen">footer()</div>
+        <div class="w-full">navbar()</div>
+        <div class="w-full">hero()</div>
+        // Add flex, items-center, justify-center to this div
+        <div class="w-full flex items-center justify-center">stat()</div>
+        <div class="w-full">carousel()</div>
+        <div class="w-full">footer()</div>
         // <div class="w-screen">"hero()"</div>
         // <div class="w-full">"daisyui()"</div>
         // <div class="w-screen">"footer()"</div>
@@ -64,25 +64,194 @@ async fn home() -> Result {
 async fn daisyui() -> Result {
     view! { <button class="btn btn-primary">"Button"</button> }
 }
+#[component]
+async fn stat() -> Result {
+    view! {
+        <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block h-8 w-8 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            ></path>
+          </svg>
+        </div>
+        <div class="stat-title">"Total Likes"</div>
+        <div class="stat-value text-primary">"25.6K"</div>
+        <div class="stat-desc">"21% more than last month"</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block h-8 w-8 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            ></path>
+          </svg>
+        </div>
+        <div class="stat-title">"Page Views"</div>
+        <div class="stat-value text-secondary">"2.6M"</div>
+        <div class="stat-desc">"21% more than last month"</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <div class="avatar avatar-online">
+            <div class="w-16 rounded-full">
+              <img src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp" />
+            </div>
+          </div>
+        </div>
+        <div class="stat-value">"86%"</div>
+        <div class="stat-title">"Tasks done"</div>
+        <div class="stat-desc text-secondary">"31 tasks remaining"</div>
+      </div>
+    </div>
+    }
+}
+#[component]
+async fn navbar() -> Result {
+    view! {
+        <div class="navbar bg-base-100 shadow-sm">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16"
+                            />
+                        </svg>
+                    </div>
+                    <ul
+                        tabindex="-1"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                    >
+                        <li><a>"Item 1"</a></li>
+                        <li>
+                            <a>"Parent"</a>
+                            <ul class="p-2">
+                                <li><a>"Submenu 1"</a></li>
+                                <li><a>"Submenu 2"</a></li>
+                            </ul>
+                        </li>
+                        <li><a>"Item 3"</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-ghost text-xl">"daisyUI"</a>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a>"Item 1"</a></li>
+                    <li>
+                        <details>
+                            <summary>"Parent"</summary>
+                            <ul class="p-2 bg-base-100 w-40 z-1">
+                                <li><a>"Submenu 1"</a></li>
+                                <li><a>"Submenu 2"</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a>"Item 3"</a></li>
+                </ul>
+            </div>
+            <div class="navbar-end"><a class="btn">"Button"</a></div>
+        </div>
+    }
+}
 
 #[component]
 async fn hero() -> Result {
     view! {
         <div
-          class="hero min-h-screen"
-          style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);"
+            class="hero min-h-screen"
+            style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);"
         >
-          <div class="hero-overlay"></div>
-          <div class="hero-content text-neutral-content text-center">
-            <div class="max-w-md">
-              <h1 class="mb-5 text-5xl font-bold">"Hello there"</h1>
-              <p class="mb-5">
-                "Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+            <div class="hero-overlay"></div>
+            <div class="hero-content text-neutral-content text-center">
+                <div class="max-w-md">
+                    <h1 class="mb-5 text-5xl font-bold">"Hello there"</h1>
+                    <p class="mb-5">
+                        "Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                 quasi. In deleniti eaque aut repudiandae et a id nisi."
-              </p>
-              <button class="btn btn-primary">"Get Started"</button>
+                    </p>
+                    <button class="btn btn-primary">"Get Started"</button>
+                </div>
             </div>
-          </div>
+        </div>
+    }
+}
+
+#[component]
+async fn carousel() -> Result {
+    view! {
+        <div class="carousel rounded-box">
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
+                    alt="Burger"
+                />
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
+                    alt="Burger"
+                />
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
+                    alt="Burger"
+                />
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"
+                    alt="Burger"
+                />
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"
+                    alt="Burger"
+                />
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp"
+                    alt="Burger"
+                />
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"
+                    alt="Burger"
+                />
+            </div>
         </div>
     }
 }
@@ -90,46 +259,47 @@ async fn hero() -> Result {
 #[component]
 async fn footer() -> Result {
     view! {
-    <footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
-      <aside>
-        <svg
-          width="50"
-          height="50"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          class="fill-current">
-          <path
-            d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path>
-        </svg>
-        <p>
-          "ACME Industries Ltd."
-          <br />
-          "Providing reliable tech since 1992"
-        </p>
-      </aside>
-      <nav>
-          <h6 class="footer-title">"Services"</h6>
-          <a class="link link-hover">"Branding"</a>
-          <a class="link link-hover">"Design"</a>
-          <a class="link link-hover">"Marketing"</a>
-          <a class="link link-hover">"Advertisement"</a>
-        </nav>
-        <nav>
-          <h6 class="footer-title">"Company"</h6>
-          <a class="link link-hover">"About us"</a>
-          <a class="link link-hover">"Contact"</a>
-          <a class="link link-hover">"Jobs"</a>
-          <a class="link link-hover">"Press kit"</a>
-        </nav>
-        <nav>
-          <h6 class="footer-title">"Legal"</h6>
-          <a class="link link-hover">"Terms of use"</a>
-          <a class="link link-hover">"Privacy policy"</a>
-          <a class="link link-hover">"Cookie policy"</a>
-        </nav>
-      </footer>
-
-      }
+        <footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
+            <aside>
+                <svg
+                    width="50"
+                    height="50"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    class="fill-current"
+                >
+                    <path
+                        d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"
+                    ></path>
+                </svg>
+                <p>
+                    "ACME Industries Ltd."
+                    <br />
+                    "Providing reliable tech since 1992"
+                </p>
+            </aside>
+            <nav>
+                <h6 class="footer-title">"Services"</h6>
+                <a class="link link-hover">"Branding"</a>
+                <a class="link link-hover">"Design"</a>
+                <a class="link link-hover">"Marketing"</a>
+                <a class="link link-hover">"Advertisement"</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">"Company"</h6>
+                <a class="link link-hover">"About us"</a>
+                <a class="link link-hover">"Contact"</a>
+                <a class="link link-hover">"Jobs"</a>
+                <a class="link link-hover">"Press kit"</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">"Legal"</h6>
+                <a class="link link-hover">"Terms of use"</a>
+                <a class="link link-hover">"Privacy policy"</a>
+                <a class="link link-hover">"Cookie policy"</a>
+            </nav>
+        </footer>
+    }
 }
