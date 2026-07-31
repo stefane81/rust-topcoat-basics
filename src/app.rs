@@ -1,3 +1,4 @@
+pub mod about;
 mod components;
 
 use topcoat::{
@@ -37,8 +38,19 @@ async fn root_layout(slot: Result) -> Result {
         <html lang="en" data-theme="sunset">
             head()
             <body class="flex flex-col min-h-screen font-sans">
-            <div class="w-full">components::navbar::navbar()</div>
-            (slot?)
+                // <nav>
+                //                     <a href="/">"home"</a>
+                //                     " | "
+                //                     <a href="/about">"about"</a>
+                //                     " | "
+                //                     <a href="/docs">"docs"</a>
+                //                     " | "
+                //                     <a href="/docs/install">"install"</a>
+                //                     " | "
+                //                     <a href="/pricing">"pricing"</a>
+                //                 </nav>
+                <div class="w-full">components::navbar::navbar()</div>
+                (slot?)
             </body>
         </html>
     }
@@ -48,13 +60,10 @@ async fn root_layout(slot: Result) -> Result {
 async fn home() -> Result {
     view! {
         <div class="w-full">components::hero::hero()</div>
-        <div class="w-full flex items-center justify-center p-6">components::stat::stat()</div>
+        <div class="w-full flex items-center justify-center p-6">
+            components::stat::stat()
+        </div>
         <div class="w-full">components::carousel::carousel()</div>
         <div class="w-full">components::footer::footer()</div>
     }
 }
-
-// #[component]
-// async fn daisyui() -> Result {
-//     view! { <button class="btn btn-primary">"Button"</button> }
-// }
