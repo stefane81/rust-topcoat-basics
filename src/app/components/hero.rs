@@ -1,6 +1,6 @@
 use topcoat::{
     Result,
-    view::{Attributes, class, component, view},
+    view::{component, view},
 };
 
 #[component]
