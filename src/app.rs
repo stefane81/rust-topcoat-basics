@@ -38,19 +38,9 @@ async fn root_layout(slot: Result) -> Result {
         <html lang="en" data-theme="sunset">
             head()
             <body class="flex flex-col min-h-screen font-sans">
-                // <nav>
-                //                     <a href="/">"home"</a>
-                //                     " | "
-                //                     <a href="/about">"about"</a>
-                //                     " | "
-                //                     <a href="/docs">"docs"</a>
-                //                     " | "
-                //                     <a href="/docs/install">"install"</a>
-                //                     " | "
-                //                     <a href="/pricing">"pricing"</a>
-                //                 </nav>
                 <div class="w-full">components::navbar::navbar()</div>
                 (slot?)
+                <div class="w-full">components::footer::footer()</div>
             </body>
         </html>
     }
@@ -64,6 +54,5 @@ async fn home() -> Result {
             components::stat::stat()
         </div>
         <div class="w-full">components::carousel::carousel()</div>
-        <div class="w-full">components::footer::footer()</div>
     }
 }
