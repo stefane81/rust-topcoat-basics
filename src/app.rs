@@ -11,32 +11,11 @@ use topcoat::{
 // The `module_router!()` macro call must be placed at the root of your route structure.
 // In this case, the `app` module is marked as the root.
 pub fn router() -> topcoat::router::Router {
-    // topcoat::router::module_router!().build()
-    //
-    // topcoat::router::module_router!()
-    //     .layout(root_layout)
-    //     .discover()
-    //     .assets(AssetBundle::load_dir("target/assets").unwrap())
-    //     .build()
     Router::builder()
-        .layout(root_layout)
         .discover()
         .assets(AssetBundle::load_dir("target/assets").unwrap())
         .build()
 }
-
-// #[tokio::main]
-// async fn main() {
-//     topcoat::start(
-//         Router::builder()
-//             .layout(root_layout)
-//             .discover()
-//             .assets(AssetBundle::load_dir("target/assets").unwrap())
-//             .build(),
-//     )
-//     .await
-//     .unwrap();
-// }
 
 #[component]
 async fn head() -> Result {
@@ -59,9 +38,7 @@ async fn root_layout(slot: Result) -> Result {
             head()
             <body class="flex flex-col min-h-screen font-sans">
             <div class="w-full">components::navbar::navbar()</div>
-
             (slot?)
-
             </body>
         </html>
     }
@@ -77,7 +54,7 @@ async fn home() -> Result {
     }
 }
 
-#[component]
-async fn daisyui() -> Result {
-    view! { <button class="btn btn-primary">"Button"</button> }
-}
+// #[component]
+// async fn daisyui() -> Result {
+//     view! { <button class="btn btn-primary">"Button"</button> }
+// }
