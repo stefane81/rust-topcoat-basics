@@ -14,7 +14,8 @@ use topcoat::{
 pub fn router() -> topcoat::router::Router {
     Router::builder()
         .discover()
-        .assets(AssetBundle::load_dir("target/assets").unwrap())
+        .assets(AssetBundle::load().unwrap())
+        // .assets(AssetBundle::load_dir("target/assets").unwrap())
         .build()
 }
 
