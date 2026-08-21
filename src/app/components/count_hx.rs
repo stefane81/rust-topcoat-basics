@@ -15,29 +15,40 @@ use topcoat::{
 #[component]
 pub async fn count_hx() -> Result {
     view! {
-
-
         // Swaps the returned fragment into #count.
-
-        <div class="flex w-full">
-            <h1 class="grow place-items-center">
-                "Count: "
-                <span id="count">"0"</span>
-            </h1>
-            <div
-                class="card bg-base-300 rounded-box grid h-20 grow place-items-center"
-            >
-            <button class="btn btn-primary" hx-post=(href!(inc_hx)) hx-target="#count" hx-swap="innerHTML">
-                "Increment"
-            </button>
+        <div class=" w-full">
+            <div class=" w-full place-items-center">
+                <h1 class="place-items-center">
+                    "Count: "
+                    <span id="count">"0"</span>
+                </h1>
             </div>
-            <div class="divider divider-horizontal">"OR"</div>
-            <div
-                class="card bg-base-300 rounded-box grid h-20 grow place-items-center"
-            >
-            <button class="btn btn-primary" hx-post=(href!(dec_hx)) hx-target="#count" hx-swap="innerHTML">
-                "Decrement"
-            </button>
+            <div class="flex w-full">
+                <div
+                    class="card bg-base-300 rounded-box grid h-20 grow place-items-center"
+                >
+                    <button
+                        class="btn btn-primary"
+                        hx-post=(href!(inc_hx))
+                        hx-target="#count"
+                        hx-swap="innerHTML"
+                    >
+                        "Increment"
+                    </button>
+                </div>
+                <div class="divider divider-horizontal">"OR"</div>
+                <div
+                    class="card bg-base-300 rounded-box grid h-20 grow place-items-center"
+                >
+                    <button
+                        class="btn btn-primary"
+                        hx-post=(href!(dec_hx))
+                        hx-target="#count"
+                        hx-swap="innerHTML"
+                    >
+                        "Decrement"
+                    </button>
+                </div>
             </div>
         </div>
     }

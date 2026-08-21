@@ -33,9 +33,6 @@ pub async fn hero() -> Result {
             class="hero min-h-screen"
             style="background-image: url(/_topcoat/assets/hero-1a3d8aa1ca907170.jpg);"
         >
-            // style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);"
-            // style=(hero_style)
-            // style="background-image: "(HERO.url)"">
             <div class="hero-overlay"></div>
             <div class="hero-content text-neutral-content text-center">
                 <div class="max-w-md">
