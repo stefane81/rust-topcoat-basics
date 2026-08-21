@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros"] }
-topcoat = { version = "0.6.2", features = ["datastar","font-fontsource","tailwind", "ui"] }
+topcoat = { version = "0.6.2", features = ["htmx","datastar","font-fontsource","tailwind", "ui"] }
 serde = { version = "1.0.229", features = ["derive"] }
 datastar = "0.3.1"
 futures-core = "0.3.34"

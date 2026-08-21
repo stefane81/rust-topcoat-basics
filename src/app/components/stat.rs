@@ -50,15 +50,6 @@ pub async fn stat() -> Result {
             </div>
 
             <div class="stat">
-                <div class="stat-figure text-secondary">
-                    <div class="avatar avatar-online">
-                        <div class="w-16 rounded-full">
-                            <img
-                                src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
-                            />
-                        </div>
-                    </div>
-                </div>
                 <div class="stat-value">"86%"</div>
                 <div class="stat-title">"Tasks done"</div>
                 <div class="stat-desc text-secondary">"31 tasks remaining"</div>
