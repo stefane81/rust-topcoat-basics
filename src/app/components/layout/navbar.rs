@@ -19,15 +19,6 @@ pub async fn navbar_links() -> Result {
 
 #[component]
 pub async fn navbar() -> Result {
-    // let links: Vec<_> = navlinks
-    //     .iter()
-    //     .map(|&(name, href)| {
-    //         view! {
-    //             <li><a href=(href)>"(name)"</a></li>
-    //         }
-    //     })
-    //     .collect::<Result<Vec<_>>>()?; // Bubbles up any rendering errors cleanly using ?
-
     view! {
         <nav>
             <div class="navbar bg-base-100 shadow-sm">
@@ -40,8 +31,6 @@ pub async fn navbar() -> Result {
                             tabindex="-1"
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                         >
-                            // Render mobile menu links directly
-                            // child: view! {(navbar_links())}?;
                         navbar_links()
                         </ul>
                     </div>
@@ -49,8 +38,6 @@ pub async fn navbar() -> Result {
                 </div>
                 <div class="navbar-center hidden lg:flex">
                     <ul class="menu menu-horizontal px-1">
-                        // Render desktop menu links directly
-                        // (desktop_links)
                         navbar_links()
                     </ul>
                 </div>

@@ -53,9 +53,9 @@ async fn root_layout(cx: &Cx, slot: Result) -> Result {
         <html lang="en" data-theme="sunset">
             head()
             <body hx-boost="true" class="flex flex-col min-h-screen font-sans">
-                <div class="w-full">components::navbar::navbar()</div>
+                <div class="w-full">components::layout::navbar::navbar()</div>
                 (slot?)
-                <div class="w-full">components::footer::footer()</div>
+                <div class="w-full">components::layout::footer::footer()</div>
             </body>
         </html>
     }
@@ -64,16 +64,16 @@ async fn root_layout(cx: &Cx, slot: Result) -> Result {
 #[page("/")]
 async fn home() -> Result {
     view! {
-        <div class="w-full">components::hero::hero()</div>
+        <div class="w-full">components::page::hero::hero()</div>
         <div class="w-full flex items-center justify-center p-6">
             // components::count_data::count_data()
         </div>
         <div class="w-full flex items-center justify-center p-6">
-            components::count_hx::count_hx()
+            components::page::count_hx::count_hx()
         </div>
         <div class="w-full flex items-center justify-center p-6">
-            components::stat::stat()
+            components::page::stat::stat()
         </div>
-        <div class="w-full">components::carousel::carousel()</div>
+        <div class="w-full">components::page::carousel::carousel()</div>
     }
 }
