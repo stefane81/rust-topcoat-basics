@@ -4,37 +4,29 @@ use topcoat::{
 };
 
 #[component]
-pub async fn navbar() -> Result {
-    let navlinks = vec![("Dashboard", "/dashboard"), ("About", "/about")];
-
-    // Build the menu lists synchronously using a loop
-    // let mut mobile_links = Vec::new();
-    // let mut desktop_links = Vec::new();
-
-    // for &(name, href) in &navlinks {
-    //     mobile_links.push(
-    //         view! {
-    //             <li><a href=(href)>(name)</a></li>
-    //         }
-    //         .await?,
-    //     );
-
-    //     desktop_links.push(
-    //         view! {
-    //             <li><a href=(href)>(name)</a></li>
-    //         }
-    //         .await?,
-    //     );
-    // }
-
-    let links: Vec<_> = navlinks
-        .iter()
-        .map(|&(name, href)| {
-            view! {
-                <li><a href=(href)>"(name)"</a></li>
+pub async fn navbar_links() -> Result {
+    let navlinks = vec![
+        ("Home", "/"),
+        ("Dashboard", "/dashboard"),
+        ("About", "/about"),
+    ];
+    view! {
+            for (name,href) in navlinks {
+                    <li><a href=(href)>(name)</a></li>
             }
-        })
-        .collect::<Result<Vec<_>>>()?; // Bubbles up any rendering errors cleanly using ?
+    }
+}
+
+#[component]
+pub async fn navbar() -> Result {
+    // let links: Vec<_> = navlinks
+    //     .iter()
+    //     .map(|&(name, href)| {
+    //         view! {
+    //             <li><a href=(href)>"(name)"</a></li>
+    //         }
+    //     })
+    //     .collect::<Result<Vec<_>>>()?; // Bubbles up any rendering errors cleanly using ?
 
     view! {
         <nav>
@@ -49,8 +41,8 @@ pub async fn navbar() -> Result {
                             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                         >
                             // Render mobile menu links directly
-                            // (mobile_links)
-                            (links.clone())
+                            // child: view! {(navbar_links())}?;
+                        navbar_links()
                         </ul>
                     </div>
                     <a class="btn btn-ghost text-xl" href="/">"Home"</a>
@@ -59,7 +51,7 @@ pub async fn navbar() -> Result {
                     <ul class="menu menu-horizontal px-1">
                         // Render desktop menu links directly
                         // (desktop_links)
-                        (links.clone())
+                        navbar_links()
                     </ul>
                 </div>
                 <div class="navbar-end"><a class="btn">"Button"</a></div>
