@@ -1,11 +1,11 @@
 use topcoat::{
     Result,
-    view::{component, view},
+    view::{View, component, view},
 };
 
 #[component]
-pub async fn stat() -> Result {
-    view! {
+pub async fn stat() -> Result<impl View> {
+    Ok(view! {
         <div class="stats shadow">
             <div class="stat">
                 <div class="stat-figure text-primary">
@@ -55,5 +55,5 @@ pub async fn stat() -> Result {
                 <div class="stat-desc text-secondary">"31 tasks remaining"</div>
             </div>
         </div>
-    }
+    })
 }

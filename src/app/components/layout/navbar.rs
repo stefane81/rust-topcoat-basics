@@ -1,25 +1,25 @@
 use topcoat::{
     Result,
-    view::{component, view},
+    view::{View, component, view},
 };
 
 #[component]
-pub async fn navbar_links() -> Result {
+pub async fn navbar_links() -> Result<impl View> {
     let navlinks = vec![
         ("Home", "/"),
         ("Dashboard", "/dashboard"),
         ("About", "/about"),
     ];
-    view! {
+    Ok(view! {
             for (name,href) in navlinks {
                     <li><a href=(href)>(name)</a></li>
             }
-    }
+    })
 }
 
 #[component]
-pub async fn navbar() -> Result {
-    view! {
+pub async fn navbar() -> Result<impl View> {
+    Ok(view! {
         <nav>
             <div class="navbar bg-base-100 shadow-sm">
                 <div class="navbar-start">
@@ -44,12 +44,12 @@ pub async fn navbar() -> Result {
                 <div class="navbar-end"><a class="btn">"Button"</a></div>
             </div>
         </nav>
-    }
+    })
 }
 
 #[component]
-pub async fn hamburger_menu() -> Result {
-    view! {
+pub async fn hamburger_menu() -> Result<impl View> {
+    Ok(view! {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -64,5 +64,5 @@ pub async fn hamburger_menu() -> Result {
                 d="M4 6h16M4 12h8m-8 6h16"
             />
         </svg>
-    }
+    })
 }

@@ -13,8 +13,8 @@ use topcoat::{
 // struct Counter(AtomicU64);
 
 #[component]
-pub async fn count_hx() -> Result {
-    view! {
+pub async fn count_hx() -> Result<impl View> {
+    Ok(view! {
         // Swaps the returned fragment into #count.
         <div class=" w-full">
             <div class=" w-full place-items-center">
@@ -51,13 +51,13 @@ pub async fn count_hx() -> Result {
                 </div>
             </div>
         </div>
-    }
+    })
 }
 
 #[route(POST "/inc_hx")]
 async fn inc_hx(cx: &Cx) -> Result<(HxResponseTrigger, View)> {
     let count = app_context::<Counter>(cx).0.fetch_add(1, Ordering::Relaxed) + 1;
-    let fragment = view! { <span id="count">(count)</span> }?;
+    let fragment = Ok(view! { <span id="count">(count)</span> });
 
     // The trigger becomes an `HX-Trigger: counted` response header, which
     // fires a `counted` event in the browser.
@@ -67,7 +67,7 @@ async fn inc_hx(cx: &Cx) -> Result<(HxResponseTrigger, View)> {
 #[route(POST "/dec_hx")]
 async fn dec_hx(cx: &Cx) -> Result<(HxResponseTrigger, View)> {
     let count = app_context::<Counter>(cx).0.fetch_sub(1, Ordering::Relaxed) - 1;
-    let fragment = view! { <span id="count">(count)</span> }?;
+    let fragment = Ok(view! { <span id="count">(count)</span> });
 
     // The trigger becomes an `HX-Trigger: counted` response header, which
     // fires a `counted` event in the browser.

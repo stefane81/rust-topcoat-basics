@@ -1,11 +1,11 @@
 use topcoat::{
     Result,
-    view::{component, view},
+    view::{View, component, view},
 };
 
 #[component]
-pub async fn carousel() -> Result {
-    view! {
+pub async fn carousel() -> Result<impl View> {
+    Ok(view! {
         <div class="carousel rounded-box">
             <div class="carousel-item">
                 <img
@@ -50,5 +50,5 @@ pub async fn carousel() -> Result {
                 />
             </div>
         </div>
-    }
+    })
 }

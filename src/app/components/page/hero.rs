@@ -1,7 +1,7 @@
 use topcoat::{
     Result,
     asset::{Asset, asset},
-    view::{component, view},
+    view::{View, component, view},
 };
 
 // const : Asset = asset!("assets/hero.jpg");
@@ -11,7 +11,7 @@ use topcoat::{
 // const HEROSTYLE: Asset = format!("background-image: {}", HERO);
 
 #[component]
-pub async fn hero() -> Result {
+pub async fn hero() -> Result<impl View> {
     // let hero_style = "background-image: "(asset!(hero.jpg));
     const HERO: Asset = asset!("assets/hero.jpg");
 
@@ -28,7 +28,7 @@ pub async fn hero() -> Result {
     // println!("{}", html);
     // style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)"
     // style="background-image: url(/target/debug/assets/hero-1a3d8aa1ca907170.jpg)"
-    view! {
+    Ok(view! {
         <div
             class="hero min-h-screen"
             style="background-image: url(/_topcoat/assets/hero-1a3d8aa1ca907170.jpg);"
@@ -48,5 +48,5 @@ pub async fn hero() -> Result {
 
         <img src=(HERO) style="display:none">
         // <img src=(HERO)>
-    }
+    })
 }

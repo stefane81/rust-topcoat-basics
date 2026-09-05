@@ -1,11 +1,11 @@
 use topcoat::{
     Result,
-    view::{component, view},
+    view::{View, component, view},
 };
 
 #[component]
-pub async fn footer() -> Result {
-    view! {
+pub async fn footer() -> Result<impl View> {
+    Ok(view! {
         <footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
             <aside>
                 <svg
@@ -48,5 +48,5 @@ pub async fn footer() -> Result {
                 <a class="link link-hover">"Cookie policy"</a>
             </nav>
         </footer>
-    }
+    })
 }
